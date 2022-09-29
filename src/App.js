@@ -10,7 +10,7 @@ function App() {
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
   const [emailaddress, setEmailAddress] = useState("");
-  const [deleteID, setDeleteID] = useState('');
+  const [deleteID, setDeleteID] = useState("");
 
   const getUsers = async () => {
     const response = await fetch(url);
@@ -20,79 +20,96 @@ function App() {
   };
   const pushData = async (first, last, email) => {
     fetch(url, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        "Content-type": "application/json"
+        "Content-type": "application/json",
       },
       body: JSON.stringify({
         FirstName: first,
         LastName: last,
         EmailAddress: email,
-      })
-    }).then((data) => console.log(data))
+      }),
+    }).then((data) => console.log(data));
   };
   const deleteData = async (id) => {
-    fetch(url + '/' + id, {
-      method: 'DELETE'
-    }).console.log('sucess');
-  }
+    fetch(url + "/" + id, {
+      method: "DELETE",
+    }).console.log("sucess");
+  };
   const updateData = async (id) => {};
-  // useEffect(() => {
-  //   getUsers();
-  // }, []);
   return (
     <>
-      <div>
-        <h1 className='text-center'>Crud App W/ React</h1>
-      </div>
-      <div className='container'>
-          <button onClick={() => getUsers()}>Get Data</button>
-      <button onClick={() => updateData()}>Update Data</button>
-      <input 
-      placeholder="enter id of data you want to delete" 
-      size={30}
-      value={deleteID}
-      onChange={(e) => {
-        setDeleteID(e.target.value);
-      }}/>
-      <button onClick={(e) => {
-        e.preventDefault();
-        deleteData(deleteID);
-      }}>Delete Data</button>
-      <form className="form form-group">
-        <label>First Name:</label>
-        <input
-          placeholder="Enter First Name"
-          value={firstname}
-          onChange={(e) => {
-            setFirstName(e.target.value);
-          }}
-        />
-        <label>Last Name:</label>
-        <input
-          placeholder="Enter Last Name"
-          value={lastname}
-          onChange={(e) => {
-            setLastName(e.target.value);
-          }}
-        />
-        <label>Email Address:</label>
-        <input
-          placeholder="Enter Email Address"
-          value={emailaddress}
-          onChange={(e) => {
-            setEmailAddress(e.target.value);
-          }}
-        />
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            pushData(firstname, lastname, emailaddress);
-          }}
-        >
-          Submit
-        </button>
-      </form>
+      <div className="container-fluid">
+        <h1>Week 15 React CRUD App</h1>
+        <div className="row">
+          <div>
+            <button onClick={() => getUsers()}>Get Data</button>
+          </div>
+          <div>
+            <button onClick={() => updateData()}>Update Data</button>
+          </div>
+          <div>
+            <input
+              placeholder="enter id of data you want to delete"
+              size={30}
+              value={deleteID}
+              onChange={(e) => {
+                setDeleteID(e.target.value);
+              }}
+            />
+          </div>
+          <div>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                deleteData(deleteID);
+              }}
+            >
+              Delete Data
+            </button>
+          </div>
+        </div>
+
+        <form>
+          <div class="form-group">
+            <label>First Name:</label>
+            <input
+              placeholder="Enter First Name"
+              value={firstname}
+              onChange={(e) => {
+                setFirstName(e.target.value);
+              }}
+            />
+          </div>
+          <div class="form-group">
+            <label>Last Name:</label>
+            <input
+              placeholder="Enter Last Name"
+              value={lastname}
+              onChange={(e) => {
+                setLastName(e.target.value);
+              }}
+            />
+          </div>
+          <div class="form-group">
+            <label>Email Address:</label>
+            <input
+              placeholder="Enter Email Address"
+              value={emailaddress}
+              onChange={(e) => {
+                setEmailAddress(e.target.value);
+              }}
+            />
+          </div>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              pushData(firstname, lastname, emailaddress);
+            }}
+          >
+            Submit
+          </button>
+        </form>
       </div>
       <div className="container">
         <table className="table table-dark">
